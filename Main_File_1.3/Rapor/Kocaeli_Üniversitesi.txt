@@ -1,0 +1,284 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+\textbf{Kocaeli Üniversitesi}
+
+\textbf{Bilgisayar Mühendisliği Bölümü}
+
+\textbf{PROGRAMLAMA LAB. I- III. Proje}
+
+\textbf{Havalimanı Uçuş Yönetim Sistemi}
+
+\textbf{ }
+
+\textbf{ONUR ARAN 200202096}
+
+\textbf{NİSA NUR BAŞAR200202048}
+
+\textbf{ÖZET}
+
+Programlama Laboratuvarı 1 dersinin 3. Projesinde bizden
+LinkedList(bağlı liste) ve kuyruk yapısı kullanarak havaalanı sistemi
+yapmamız istenmiştir.
+
+Bağlı liste, her elemanın bir değerinin yanında bir de referans içerdiği
+veri yapısıdır. Bağlı listeler en basit ve en çok kullanılan veri
+yapılarındandır. Yığın, kuyruk gibi diğer soyut veri yapılarını
+gerçeklemek için sıklıkla kullanılır.
+
+\textbf{1- GİRİŞ}
+
+Proje için C programlama dili ve CodeBlocks geliştirme ortamı
+kullanıldı.
+
+AT\&T Bell laboratuvarlarında, KenThompson ve DennisRitchie tarafından
+UNIX İşletim Sistemi' ni geliştirebilmek amacıyla B dilinden türetilmiş
+yapısal bir programlama dilidir. Code:Blocks özellikle C ve C++ gibi
+programlama dillerinde kodlamageliştirmeyapmamızaimkanveren, açık
+kaynakkodlu ve cross-platform bir IDE'dir.
+
+\textbf{2-YÖNTEM}
+
+Projemiz main(),queue\_control,ertelenen(), olmak üzere 3 adet
+fonksiyondan oluşmaktadır.
+
+MAİN():
+
+Main fonksiyonu ana fonksiyon olup yan fonksiyonları çalıştıran
+
+ana fonksiyondur.
+
+int queue\_control(int talep,int id,int ucak,int ertelenme)
+
+\{
+
+int loop\_control = 0;
+
+int bos=0;
+
+int sayac=0;
+
+struct node *index = front;
+
+while(index != NULL)
+
+\{
+
+sayac++;
+
+if(sayac==24)
+
+\{
+
+printf("Maksimum inis sayisina ulasildi.\textbackslash n");
+
+return 99;
+
+\}
+
+if(index-\textgreater talep\_edilen\_inis\_saati == talep)
+
+\{
+
+if(index-\textgreater oncelik\_id !=NULL \&\&
+index-\textgreater oncelik\_id==id \&\&
+index-\textgreater ucak\_id\textless ucak \&\& ertelenme ==3)
+
+\{
+
+printf("Inis talebiniz ucak ID farki nedeniyle
+reddedilmistir.\textbackslash n");
+
+return 2;
+
+\}
+
+if(index-\textgreater oncelik\_id !=NULL \&\&
+index-\textgreater oncelik\_id==id \&\&
+index-\textgreater ucak\_id\textless ucak \&\& ertelenme ==2)
+
+\{
+
+printf("Inis talebiniz ucak ID farki nedeniyle
+reddedilmistir.\textbackslash n");
+
+ertelenme++;
+
+talep++;
+
+ertelenen(talep,id,ucak,ertelenme);
+
+return 3;
+
+\}
+
+if(index-\textgreater oncelik\_id !=NULL \&\&
+index-\textgreater oncelik\_id\textgreater id \&\&
+index-\textgreater ucak\_id != ucak)
+
+\{
+
+printf("Inis talebiniz yuksek oncelik nedeniyle
+onaylanmistir.\textbackslash n");
+
+enqueue(talep,id,ucak,ertelenme);
+
+tut1 = index-\textgreater talep\_edilen\_inis\_saati;
+
+tut2 = index-\textgreater oncelik\_id;
+
+tut3 = index-\textgreater ucak\_id;
+
+tut4 = index-\textgreater ertelenme;
+
+dequeue(tut1,tut2,tut3,tut4);
+
+ertelenen(tut1,tut2,tut3,tut4);
+
+return 2;
+
+\}
+
+return 0;
+
+\}
+
+index = index-\textgreater next;
+
+\}
+
+return 1;
+
+\}
+
+Burada gelen tüm iniş isteklerini kontrolleri yapılmaktadır. Eğer bir
+iniş aynı saate denk geliyorsa yüksek önceliği var mı yok mu veya id
+olarak daha mı öncelikli diye bir kontrol yapılıyor. Eğer hiçbir şekilde
+önceliği yoksa ertelenen fonksiyonuna erteliyor yada önceliği varsa
+öncelikli olanı ekleyip önceliği olmayanı silip ertelenen fonksiyonuna
+gönderiyor.
+
+int ertelenen(int talep,int id,int ucak,int ertelenme)
+
+\{
+
+if(queue\_control(talep,id,ucak,ertelenme)==0)
+
+\{
+
+printf("\textbackslash nAyni saatte baska bir talep oldugu icin
+talebiniz 1 saat erteleniyor..");
+
+ertelenme = ertelenme +1;
+
+talep = talep + 1;
+
+if(ertelenme\textgreater3)
+
+\{
+
+yonlendir(talep,id,ucak,ertelenme);
+
+return 0;
+
+\}
+
+ertelenen(talep,id,ucak,ertelenme);
+
+\}
+
+else if(queue\_control(talep,id,ucak,ertelenme)==1 \&\&
+queue\_control(talep,id,ucak,ertelenme) !=2 \&\&
+queue\_control(talep,id,ucak,ertelenme)!=3)
+
+\{
+
+enqueue(talep,id,ucak,ertelenme);
+
+\}
+
+\}
+
+Burada ertelenen fonksiyonların kuyruk kontrol fonksiyonunda kontrolünü
+yapıp ona göre erteleme veya ekleme yapıyor. Eğer 3den fazla erteleme
+yapmışsa bu uçağı başka bir havalimanına yönlendirme yapıyor.
+
+DENEYSEL SONUÇLAR
+
+{}
+
+{}
+
+{}
+
+SONUÇ
+
+Bu projeden öncelikli kuyruk yapısını bağlı listeleri öğrendim.Araştırma
+yapmayı ve öğrenmeyi öğrendim. Araştırma yaparken C ile veri yapıları
+Bağlı Listeleri Struct yapılarını araştırdım ve bunların üzerinde
+kodumda kullanmadığım bilgileri de öğrendim.
+
+AKIŞ ŞEMASI
+
+{}
+
+KAYNAKÇA
+
+\href{https://hasscript.com/908/öncelikli-kuyruk-prioty-queue-nedir}{\emph{https://hasscript.com/908/öncelikli-kuyruk-prioty-queue-nedir}}
+
+\href{https://medium.com/@tolgahan.cepel/doğrusal-veri-yapıları-4-kuyruk-queue-dcbd07e8ba77}{\emph{https://medium.com/@tolgahan.cepel/doğrusal-veri-yapıları-4-kuyruk-queue-dcbd07e8ba77}}
+
+\href{https://en.wikipedia.org/wiki/Priority_queue\#:~:text=In\%20computer\%20science\%2C\%20a\%20priority,an\%20element\%20with\%20low\%20priority}{\emph{https://en.wikipedia.org/wiki/Priority\_queue\#:\textasciitilde:text=In\%20computer\%20science\%2C\%20a\%20priority,an\%20element\%20with\%20low\%20priority}}
+
+\end{document}
